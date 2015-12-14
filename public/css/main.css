@@ -5,13 +5,13 @@ body {
 
 header, footer {
   width: 100vw;
-  background: gray;
+  background: #999999;
   color: white;
 }
 
 header {
   height: 50px;
-  padding-left: 44%;
+  padding-left: 43%;
   padding-top: 10px;
   font-size: 28px;
 }
