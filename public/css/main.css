@@ -4,10 +4,10 @@ html, body {
   padding: 0;
 }
 
-/*body {
+body {
   margin: 0;
   overflow: hidden;
-}*/
+}
 
 header, footer {
   width: 100vw;
