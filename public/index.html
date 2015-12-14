@@ -5,31 +5,21 @@
     <title>Close Call vs. Strava</title>
     <link rel="stylesheet" href="css/main.css">
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-      function initialize() {
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-          center: new google.maps.LatLng(39.757837, -105.0073),
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
   </head>
   <body>
     <header>Close Call vs. Strava</header>
     <main>
       <form>
         <input id="location" type="text" placeholder="Location">
-        <input id="send" type="submit" value="Search">
+        <input id="send" type="button" value="Search">
       </form>
       <div id="map"></div>
     </main>
     <footer>&copy; 2015 Ben Ebel</footer>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQV0eTzqbgOU5adUyGDWONXBmCkQm68DM&signed_in=true&callback=initMap"
+        async defer></script>
+    <script type="text/javascript" src="js/googlemaps.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
