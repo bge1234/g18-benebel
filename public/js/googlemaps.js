@@ -13,8 +13,11 @@ $(window).load(function() {
   });
 
   //Display rides from polylines
-  for(var i = 0; i < stravaData.length; i++) {
-    var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
+  var stravaStored = JSON.parse(localStorage.getItem ("strava"));
+  for(var i = 0; i < stravaStored.length; i++) {
+  // for(var i = 0; i < stravaData.length; i++) {
+  //   var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
+    var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
     var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
     var setRegion = new google.maps.Polyline({
       path: decodedPath,
@@ -28,10 +31,11 @@ $(window).load(function() {
 
   //Display markers at CCDB points
   for(var i = 0; i < ccdbData.length; i++) {
+    getColor(ccdbData[i]["date"]);
     var marker = new google.maps.Marker({
       position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
       map: map,
-      icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+      icon: getColor(ccdbData[i]["date"])
     });
   }
 
@@ -50,6 +54,17 @@ function decodeLevels(encodedLevelsString) {
       decodedLevels.push(level);
   }
   return decodedLevels;
+}
+
+function getColor(date) {
+  if(date.indexOf("2015-12") > -1)
+    return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  else if (date.indexOf("2015-11") > -1 || date.indexOf("2015-10") > -1 || date.indexOf("2015-09") > -1)
+    return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+  else if (date.indexOf("2015-08") > -1 || date.indexOf("2015-07") > -1 || date.indexOf("2015-06") > -1)
+    return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+  else
+    return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 }
 
 function geocodeAddress(geocoder, resultsMap) {
