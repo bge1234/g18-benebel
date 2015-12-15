@@ -58,28 +58,34 @@ function decodeLevels(encodedLevelsString) {
 }
 
 function getColor(date) {
-  var currentDate = getYearMonth();
+  var currentMonth = getCurrentMonth();
+  var targetMonth = parseInt(date.split('-')[1]);
+  var currentYear = getCurrentYear();
+  var targetYear = parseInt(date.split('-')[0]);
 
-  if(date.indexOf("2015-12") > -1)
-    return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-  else if (date.indexOf("2015-11") > -1 || date.indexOf("2015-10") > -1 || date.indexOf("2015-09") > -1)
-    return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
-  else if (date.indexOf("2015-08") > -1 || date.indexOf("2015-07") > -1 || date.indexOf("2015-06") > -1)
-    return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-  else
-    return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-
-  // if(date.indexOf("2015-12") > -1)
-  //   return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-  // else if (date.indexOf("2015-11") > -1 || date.indexOf("2015-10") > -1 || date.indexOf("2015-09") > -1)
-  //   return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
-  // else if (date.indexOf("2015-08") > -1 || date.indexOf("2015-07") > -1 || date.indexOf("2015-06") > -1)
-  //   return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-  // else
-  //   return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+  if(currentYear === targetYear) {
+    if(currentMonth - targetMonth === 0)
+      return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    else if (currentMonth - targetMonth === 1 || currentMonth - targetMonth === 2 || currentMonth - targetMonth === 3)
+      return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+    else if (currentMonth - targetMonth === 4 || currentMonth - targetMonth === 5 || currentMonth - targetMonth === 6)
+      return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+    else
+      return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+  }
+  else {
+    if(currentMonth - (targetMonth + 6) === 0)
+      return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    else if (currentMonth - (targetMonth + 6) === 1 || currentMonth - targetMonth === 2 || currentMonth - targetMonth === 3)
+      return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+    else if (currentMonth - (targetMonth + 6) === 4 || currentMonth - targetMonth === 5 || currentMonth - targetMonth === 6)
+      return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+    else
+      return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+  }
 }
 
-function getYearMonth() {
+function getCurrentMonth() {
   var current = new Date();
   var dateArray = (current.toString()).split(' ');
 
@@ -109,8 +115,13 @@ function getYearMonth() {
   else if (dateArray[1] === "Dec")
     month = 12;
 
-  var yearMonthString = dateArray[3] + '-' + month + '-' + dateArray[2];
-  return yearMonthString;
+  return month;
+}
+
+function getCurrentYear() {
+  var current = new Date();
+  var dateArray = (current.toString()).split(' ');
+  return parseInt(dateArray[3]);
 }
 
 function geocodeAddress(geocoder, resultsMap) {

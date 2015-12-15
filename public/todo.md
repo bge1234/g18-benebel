@@ -1,2 +1,1 @@
-- Make date checking dynamic rather than hard-coded: I have the current date, so I just need to subtract the date of the datapoint from the current date and then color it based on the time between them.
-- Set up Node backend to save rides from any user who authenticates to the app.
+- Set up Node backend to store rides from any user who authenticates to the app, and then display all of them on load instead of just mine.
