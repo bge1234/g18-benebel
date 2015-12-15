@@ -28,8 +28,14 @@ main {
 }
 
 #map {
-  height: 85%;
+  height: 75%;
   width: 85%;
+  margin: 0 auto;
+}
+
+#legend {
+  height: 5%;
+  width: 80%;
   margin: 0 auto;
 }
 
