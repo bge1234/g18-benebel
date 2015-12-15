@@ -1,4 +1,4 @@
-[{
+var stravaData = [{
 	"id": 450341808,
 	"resource_state": 2,
 	"external_id": "activity_982491242.gpx",
@@ -1498,4 +1498,4 @@
 	"total_photo_count": 0,
 	"has_kudoed": false,
 	"workout_type": null
-}]
+}];
