@@ -1,2 +1,3 @@
 - Upload all Garmin activities to Strava.
 - Use actual Strava API instead of downloaded data.
+- Change color of CCDB points based on date and/or time.

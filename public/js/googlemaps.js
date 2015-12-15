@@ -9,7 +9,7 @@ $(window).load(function() {
   var marker = new google.maps.Marker({
     position: {lat: 39.757785, lng: -105.007142},
     map: map,
-    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+    icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
   });
 
   //Display rides from polylines
@@ -31,7 +31,7 @@ $(window).load(function() {
     var marker = new google.maps.Marker({
       position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
       map: map,
-      icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+      icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
     });
   }
 
