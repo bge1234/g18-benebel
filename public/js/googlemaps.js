@@ -1,14 +1,18 @@
 $(window).load(function() {
+  //Create map
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
     center: {lat: 39.757785, lng: -105.007142}
   });
 
+  //Mark starting position for reference
   var marker = new google.maps.Marker({
     position: {lat: 39.757785, lng: -105.007142},
-    map: map
+    map: map,
+    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
   });
 
+  //Display rides from polylines
   for(var i = 0; i < stravaData.length; i++) {
     var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
     var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
@@ -19,6 +23,15 @@ $(window).load(function() {
       strokeOpacity: 1.0,
       strokeWeight: 2,
       map: map
+    });
+  }
+
+  //Display markers at CCDB points
+  for(var i = 0; i < ccdbData.length; i++) {
+    var marker = new google.maps.Marker({
+      position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
+      map: map,
+      icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
     });
   }
 

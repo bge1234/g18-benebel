@@ -1,0 +1,2 @@
+- Upload all Garmin activities to Strava.
+- Use actual Strava API instead of downloaded data.
