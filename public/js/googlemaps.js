@@ -13,11 +13,12 @@ $(window).load(function() {
   });
 
   //Display rides from polylines
-  var stravaStored = JSON.parse(localStorage.getItem ("strava"));
-  for(var i = 0; i < stravaStored.length; i++) {
-  // for(var i = 0; i < stravaData.length; i++) {
-  //   var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
-    var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
+  // var stravaStored = JSON.parse(localStorage.getItem ("strava"));
+  // console.log(stravaStored);
+  // for(var i = 0; i < stravaStored.length; i++) {
+  for(var i = 0; i < stravaData.length; i++) {
+    var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
+    // var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
     var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
     var setRegion = new google.maps.Polyline({
       path: decodedPath,
@@ -57,6 +58,8 @@ function decodeLevels(encodedLevelsString) {
 }
 
 function getColor(date) {
+  var currentDate = getYearMonth();
+
   if(date.indexOf("2015-12") > -1)
     return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
   else if (date.indexOf("2015-11") > -1 || date.indexOf("2015-10") > -1 || date.indexOf("2015-09") > -1)
@@ -65,6 +68,49 @@ function getColor(date) {
     return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
   else
     return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+
+  // if(date.indexOf("2015-12") > -1)
+  //   return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  // else if (date.indexOf("2015-11") > -1 || date.indexOf("2015-10") > -1 || date.indexOf("2015-09") > -1)
+  //   return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+  // else if (date.indexOf("2015-08") > -1 || date.indexOf("2015-07") > -1 || date.indexOf("2015-06") > -1)
+  //   return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+  // else
+  //   return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+}
+
+function getYearMonth() {
+  var current = new Date();
+  var dateArray = (current.toString()).split(' ');
+
+  var month = "";
+  if (dateArray[1] === "Jan")
+    month = 01;
+  else if (dateArray[1] === "Feb")
+    month = 02;
+  else if (dateArray[1] === "Mar")
+    month = 03;
+  else if (dateArray[1] === "Apr")
+    month = 04;
+  else if (dateArray[1] === "May")
+    month = 05;
+  else if (dateArray[1] === "Jun")
+    month = 06;
+  else if (dateArray[1] === "Jul")
+    month = 07;
+  else if (dateArray[1] === "Aug")
+    month = 08;
+  else if (dateArray[1] === "Sep")
+    month = 09;
+  else if (dateArray[1] === "Oct")
+    month = 10;
+  else if (dateArray[1] === "Nov")
+    month = 11;
+  else if (dateArray[1] === "Dec")
+    month = 12;
+
+  var yearMonthString = dateArray[3] + '-' + month + '-' + dateArray[2];
+  return yearMonthString;
 }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -81,36 +127,3 @@ function geocodeAddress(geocoder, resultsMap) {
       alert('Geocode was not successful for the following reason: ' + status);
   });
 }
-
-// function initMap() {
-//     var myLatlng = new google.maps.LatLng(39.757785, -105.007142);
-//     var myOptions = {
-//         zoom: 11,
-//         center: myLatlng,
-//         mapTypeId: google.maps.MapTypeId.ROADMAP
-//     }
-//     var map = new google.maps.Map(document.getElementById("map"), myOptions);
-//
-//     var decodedPath = google.maps.geometry.encoding.decodePath("{nsqFbqa`S`sAg}EriAiw@fP_YvPeQvX}k@`EcXHi_@}U?wBsCk\\?QcuCceACDg_AqIb@nTO@vMuh@g@oA}Is@rJeU}@HgnLwu@AaB|@JvDAwFuQ_A{DpF_MrAc~Eb@VnhKlA|KfAfAfAwCf@zBJsAi@|GeJ|Z_SpQsHZ}HpDkN~UaHdXiEdIeCp@qGoCkIzPmCuCkc@sCoSgEsGb@uCmDcLdDDj^qBhQFjIzBfRfYny@jCrb@UlMnCbA~GlSnHtLTxH{F~WeG_IoI`@gAmPq[}@}BjG`@iCoAmAa[M_H|@kJ|McXhOoIImHgIoA~DXrH`BvCbDmJnMz@jWyNtIgMlHgAtbFt@bnA`PpBvECvLcAWfAhC|@|lAfl@u@XmEvxA[~BhEdD\\`ShXv^kh@uAuB_BdB_C_Bw[_c@|BfF{ItQlCfEkHnHzNtS`@lCzFrFrObG~M~b@X`oBmQv@");
-//     var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-//
-//     var setRegion = new google.maps.Polyline({
-//         path: decodedPath,
-//         levels: decodedLevels,
-//         strokeColor: "#FF0000",
-//         strokeOpacity: 1.0,
-//         strokeWeight: 2,
-//         map: map
-//     });
-// }
-//
-// function decodeLevels(encodedLevelsString) {
-//     var decodedLevels = [];
-//
-//     for (var i = 0; i < encodedLevelsString.length; ++i) {
-//         var level = encodedLevelsString.charCodeAt(i) - 63;
-//         decodedLevels.push(level);
-//     }
-//     console.log(decodedLevels);
-//     return decodedLevels;
-// }

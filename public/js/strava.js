@@ -4,6 +4,7 @@ $("#send").click(function() {
 });
 
 var code = (window.location.href).split('=')[2];
+console.log("Temporary code: " + code);
 
 //Send in temporary code to get access token
 var stravaPoster = $.ajax({
@@ -14,11 +15,14 @@ var stravaPoster = $.ajax({
 var token = "";
 
 stravaPoster.done(function(response) {
+  console.log("Succesful post!");
+  console.log("Access token: " + response.access_token);
   token = response.access_token;
 });
 
 stravaPoster.fail(function(response) {
   console.log("Error requesting access token");
+  console.log(response);
 });
 
 var stravaGetter2 = $.ajax({
@@ -34,4 +38,5 @@ stravaGetter2.done(function(response) {
 
 stravaGetter2.fail(function(response) {
   console.log("Error loading Strava data");
+  console.log(response);
 });
