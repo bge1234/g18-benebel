@@ -23,7 +23,6 @@ var stravaGetter2 = $.ajax({
 
 stravaGetter2.done(function(response) {
   console.log("Strava data loaded successfully!");
-  console.log(response);
 });
 
 stravaGetter2.fail(function(response) {
