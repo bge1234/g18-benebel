@@ -4,7 +4,6 @@ $("#send").click(function() {
 });
 
 var code = (window.location.href).split('=')[2];
-console.log(code);
 
 //Send in temporary code to get access token
 var stravaPoster = $.ajax({
@@ -17,7 +16,7 @@ stravaPoster.fail(function(response) {
 });
 
 var stravaGetter2 = $.ajax({
-  url: "https://www.strava.com/api/v3/athlete?access_token=34e7589f38c1ce6ac57e83ef6c16a6f01e385f29",
+  url: "https://www.strava.com/api/v3/athlete/activities?access_token=34e7589f38c1ce6ac57e83ef6c16a6f01e385f29",
   method: "GET",
   dataType: "json",
 });
