@@ -1,4 +1,5 @@
-$(window).load(function() {
+$(window).load(initMap());
+function initMap() {
   //Create map
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
@@ -12,22 +13,23 @@ $(window).load(function() {
     icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
   });
 
-  //Display rides from polylines
-  // var stravaStored = JSON.parse(localStorage.getItem ("strava"));
-  // console.log(stravaStored);
-  // for(var i = 0; i < stravaStored.length; i++) {
-  for(var i = 0; i < stravaData.length; i++) {
-    var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
-    // var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
-    var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-    var setRegion = new google.maps.Polyline({
-      path: decodedPath,
-      levels: decodedLevels,
-      strokeColor: "#FF0000",
-      strokeOpacity: 1.0,
-      strokeWeight: 2,
-      map: map
-    });
+  // //Display rides from polylines
+  var stravaStored = JSON.parse(localStorage.getItem ("strava"));
+  if(stravaStored !== null) {
+    for(var i = 0; i < stravaStored.length; i++) {
+    // for(var i = 0; i < stravaData.length; i++) {
+    //   var decodedPath = google.maps.geometry.encoding.decodePath(stravaData[i]["map"]["summary_polyline"]);
+      var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
+      var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+      var setRegion = new google.maps.Polyline({
+        path: decodedPath,
+        levels: decodedLevels,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+        map: map
+      });
+    }
   }
 
   //Display markers at CCDB points
@@ -45,7 +47,7 @@ $(window).load(function() {
   document.getElementById('send').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
   });
-});
+}
 
 function decodeLevels(encodedLevelsString) {
   var decodedLevels = [];

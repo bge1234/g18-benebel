@@ -1,3 +1,4 @@
+- Cycled through user's activities with multiple API calls until all activities were loaded. Now need to cycle through all results to display simultaneously.
 - Video.
 - Writeup.
 - Portfolio on student site.
