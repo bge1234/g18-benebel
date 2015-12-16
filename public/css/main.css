@@ -31,6 +31,17 @@ main {
   height: 80vh;
 }
 
+form {
+  width: 385px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+p {
+  font-size: 14px;
+  text-align: center;
+}
+
 #map {
   height: 75%;
   width: 85%;
@@ -41,13 +52,6 @@ main {
   height: 5%;
   width: 80%;
   margin: 0 auto;
-}
-
-form {
-  height: 50px;
-  width: 385px;
-  margin: 0 auto;
-  margin-top: 30px;
 }
 
 #location {
