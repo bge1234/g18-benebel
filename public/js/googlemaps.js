@@ -16,24 +16,23 @@ function initMap() {
   // //Display rides from polylines
   var lslength = localStorage.length;
   for(var j = 0; j < lslength; j++) {
-    console.log("j = " + j);
-      var stravaStored = JSON.parse(localStorage.getItem ("strava" + j));
-      if(stravaStored !== null) {
-        for(var i = 0; i < stravaStored.length; i++) {
-          if(stravaStored[i]["map"]["summary_polyline"] !== null) {
-            var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
-            var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-            var setRegion = new google.maps.Polyline({
-              path: decodedPath,
-              levels: decodedLevels,
-              strokeColor: "#FF0000",
-              strokeOpacity: 1.0,
-              strokeWeight: 2,
-              map: map
-            });
-          }
+    var stravaStored = JSON.parse(localStorage.getItem ("strava" + j));
+    if(stravaStored !== null) {
+      for(var i = 0; i < stravaStored.length; i++) {
+        if(stravaStored[i]["map"]["summary_polyline"] !== null) {
+          var decodedPath = google.maps.geometry.encoding.decodePath(stravaStored[i]["map"]["summary_polyline"]);
+          var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+          var setRegion = new google.maps.Polyline({
+            path: decodedPath,
+            levels: decodedLevels,
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+            map: map
+          });
         }
       }
+    }
   }
 
   //Display markers at CCDB points
