@@ -22,6 +22,10 @@ header {
   font-size: 28px;
 }
 
+a {
+  text-decoration: none;
+}
+
 main {
   width: 100vw;
   height: 80vh;

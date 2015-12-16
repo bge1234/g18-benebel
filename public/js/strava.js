@@ -29,7 +29,6 @@ $("#strava").click(function() {
     stravaGetter.done(function(response) {
       console.log("Strava data loaded successfully!");
       localStorage.setItem("strava" + count, JSON.stringify(response));
-      initMap();
 
       //Have to make multiple calls since the number of returned results is limited
       nextResponse(token, response);
@@ -46,14 +45,11 @@ $("#strava").click(function() {
 
 function nextResponse(token, response) {
   var endTime = Date.parse((response[response.length - 1]["start_date"]).split('T')[0] + " 00:00:00 GMT") / 1000 + 86400;
-  console.log((response[response.length - 1]["start_date"]).split('T')[0] + " 00:00:00 GMT");
-  console.log("endTime = " + endTime);
-  console.log("count = " + count);
 
   if(endTime !== endTimeLast) {
     count++;
     endTimeLast = endTime;
-console.log("https://www.strava.com/api/v3/athlete/activities?access_token=" + token + "&before=" + endTime);
+
     var stravaGetter2 = $.ajax({
       url: "https://www.strava.com/api/v3/athlete/activities?access_token=" + token + "&before=" + endTime,
       method: "GET",
@@ -63,7 +59,6 @@ console.log("https://www.strava.com/api/v3/athlete/activities?access_token=" + t
     stravaGetter2.done(function(response2) {
       console.log("Strava data loaded successfully!");
       localStorage.setItem("strava" + count, JSON.stringify(response));
-      initMap();
 
       //Have to make multiple calls since the number of returned results is limited
       nextResponse(token, response2);
@@ -72,5 +67,8 @@ console.log("https://www.strava.com/api/v3/athlete/activities?access_token=" + t
     stravaGetter2.fail(function(response2) {
       console.log("Error loading Strava data");
     });
+  }
+  else {
+    initMap();
   }
 }

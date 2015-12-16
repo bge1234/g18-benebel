@@ -1,6 +1,0 @@
-- Cycled through user's activities with multiple API calls until all activities were loaded. Now need to cycle through all results to display simultaneously.
-- Video.
-- Writeup.
-- Portfolio on student site.
-- Check that all requirements have been met.
-- Set up Node backend to store rides from any user who authenticates to the app, and then display all of them on load instead of just mine.
