@@ -38,12 +38,12 @@ function initMap() {
 
   //Display markers at CCDB points
   var ccdbStored = JSON.parse(localStorage.getItem ("ccdb"));
-  for(var i = 0; i < ccdbStored.length; i++) {
-    getColor(ccdbStored[i]["date"]);
+  for(var i = 0; i < ccdbData.length; i++) {
+    getColor(ccdbData[i]["date"]);
     var marker = new google.maps.Marker({
-      position: {lat: ccdbStored[i]["latitude"], lng: ccdbStored[i]["longitude"]},
+      position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
       map: map,
-      icon: getColor(ccdbStored[i]["date"])
+      icon: getColor(ccdbData[i]["date"])
     });
   }
 
