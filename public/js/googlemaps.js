@@ -1,4 +1,5 @@
 $(window).load(initMap());
+
 function initMap() {
   //Create map
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -13,8 +14,8 @@ function initMap() {
     icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
   });
 
-  // //Display rides from polylines
-  var lslength = localStorage.length;
+  //Display rides from polylines
+  var lslength = localStorage.length - 1;
   for(var j = 0; j < lslength; j++) {
     var stravaStored = JSON.parse(localStorage.getItem ("strava" + j));
     if(stravaStored !== null) {
@@ -36,12 +37,13 @@ function initMap() {
   }
 
   //Display markers at CCDB points
-  for(var i = 0; i < ccdbData.length; i++) {
-    getColor(ccdbData[i]["date"]);
+  var ccdbStored = JSON.parse(localStorage.getItem ("ccdb"));
+  for(var i = 0; i < ccdbStored.length; i++) {
+    getColor(ccdbStored[i]["date"]);
     var marker = new google.maps.Marker({
-      position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
+      position: {lat: ccdbStored[i]["latitude"], lng: ccdbStored[i]["longitude"]},
       map: map,
-      icon: getColor(ccdbData[i]["date"])
+      icon: getColor(ccdbStored[i]["date"])
     });
   }
 
