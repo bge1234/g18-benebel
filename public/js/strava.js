@@ -1,4 +1,4 @@
-console.log("Make sure to install and enable the CORS Chrome exte");
+console.log("Make sure to install and enable the CORS Chrome extension: https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi");
 
 var count = 0;
 var endTimeLast = Date.now();

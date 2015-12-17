@@ -1,2 +1,0 @@
-- Set up Node backend to store rides from any user who authenticates to the app, and then display all of them on load instead of just mine.
-- Practice presentation.
