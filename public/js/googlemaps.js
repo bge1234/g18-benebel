@@ -8,7 +8,13 @@ function initMap() {
   });
 
   //Mark starting position for reference
-  var marker = new google.maps.Marker({
+  var galvanize = new google.maps.Marker({
+    position: {lat: 39.754239, lng: -105.034896},
+    map: map,
+    icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+  });
+
+  var home = new google.maps.Marker({
     position: {lat: 39.757785, lng: -105.007142},
     map: map,
     icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
@@ -37,15 +43,15 @@ function initMap() {
   }
 
   //Display markers at CCDB points
-  var ccdbStored = JSON.parse(localStorage.getItem ("ccdb"));
-  for(var i = 0; i < ccdbData.length; i++) {
-    getColor(ccdbData[i]["date"]);
-    var marker = new google.maps.Marker({
-      position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
-      map: map,
-      icon: getColor(ccdbData[i]["date"])
-    });
-  }
+  // var ccdbStored = JSON.parse(localStorage.getItem ("ccdb"));
+  // for(var i = 0; i < ccdbData.length; i++) {
+  //   getColor(ccdbData[i]["date"]);
+  //   var marker = new google.maps.Marker({
+  //     position: {lat: ccdbData[i]["latitude"], lng: ccdbData[i]["longitude"]},
+  //     map: map,
+  //     icon: getColor(ccdbData[i]["date"])
+  //   });
+  // }
 
   var geocoder = new google.maps.Geocoder();
 
@@ -64,84 +70,84 @@ function decodeLevels(encodedLevelsString) {
   return decodedLevels;
 }
 
-function getColor(date) {
-  var currentMonth = getCurrentMonth();
-  var targetMonth = parseInt(date.split('-')[1]);
-  var currentYear = getCurrentYear();
-  var targetYear = parseInt(date.split('-')[0]);
-
-  if(currentYear === targetYear) {
-    if(currentMonth - targetMonth === 0)
-      return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-    else if (currentMonth - targetMonth === 1 || currentMonth - targetMonth === 2 || currentMonth - targetMonth === 3)
-      return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
-    else if (currentMonth - targetMonth === 4 || currentMonth - targetMonth === 5 || currentMonth - targetMonth === 6)
-      return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-    else
-      return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-  }
-  else {
-    if(currentMonth - (targetMonth + 6) === 0)
-      return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-    else if (currentMonth - (targetMonth + 6) === 1 || currentMonth - targetMonth === 2 || currentMonth - targetMonth === 3)
-      return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
-    else if (currentMonth - (targetMonth + 6) === 4 || currentMonth - targetMonth === 5 || currentMonth - targetMonth === 6)
-      return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-    else
-      return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-  }
-}
-
-function getCurrentMonth() {
-  var current = new Date();
-  var dateArray = (current.toString()).split(' ');
-
-  var month = "";
-  if (dateArray[1] === "Jan")
-    month = 01;
-  else if (dateArray[1] === "Feb")
-    month = 02;
-  else if (dateArray[1] === "Mar")
-    month = 03;
-  else if (dateArray[1] === "Apr")
-    month = 04;
-  else if (dateArray[1] === "May")
-    month = 05;
-  else if (dateArray[1] === "Jun")
-    month = 06;
-  else if (dateArray[1] === "Jul")
-    month = 07;
-  else if (dateArray[1] === "Aug")
-    month = 08;
-  else if (dateArray[1] === "Sep")
-    month = 09;
-  else if (dateArray[1] === "Oct")
-    month = 10;
-  else if (dateArray[1] === "Nov")
-    month = 11;
-  else if (dateArray[1] === "Dec")
-    month = 12;
-
-  return month;
-}
-
-function getCurrentYear() {
-  var current = new Date();
-  var dateArray = (current.toString()).split(' ');
-  return parseInt(dateArray[3]);
-}
-
-function geocodeAddress(geocoder, resultsMap) {
-  var address = document.getElementById('location').value;
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    }
-    else
-      alert('Geocode was not successful for the following reason: ' + status);
-  });
-}
+// function getColor(date) {
+//   var currentMonth = getCurrentMonth();
+//   var targetMonth = parseInt(date.split('-')[1]);
+//   var currentYear = getCurrentYear();
+//   var targetYear = parseInt(date.split('-')[0]);
+//
+//   if(currentYear === targetYear) {
+//     if(currentMonth - targetMonth === 0)
+//       return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+//     else if (currentMonth - targetMonth === 1 || currentMonth - targetMonth === 2 || currentMonth - targetMonth === 3)
+//       return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+//     else if (currentMonth - targetMonth === 4 || currentMonth - targetMonth === 5 || currentMonth - targetMonth === 6)
+//       return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+//     else
+//       return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+//   }
+//   else {
+//     if(currentMonth - (targetMonth + 6) === 0)
+//       return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+//     else if (currentMonth - (targetMonth + 6) === 1 || currentMonth - targetMonth === 2 || currentMonth - targetMonth === 3)
+//       return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+//     else if (currentMonth - (targetMonth + 6) === 4 || currentMonth - targetMonth === 5 || currentMonth - targetMonth === 6)
+//       return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+//     else
+//       return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+//   }
+// }
+//
+// function getCurrentMonth() {
+//   var current = new Date();
+//   var dateArray = (current.toString()).split(' ');
+//
+//   var month = "";
+//   if (dateArray[1] === "Jan")
+//     month = 01;
+//   else if (dateArray[1] === "Feb")
+//     month = 02;
+//   else if (dateArray[1] === "Mar")
+//     month = 03;
+//   else if (dateArray[1] === "Apr")
+//     month = 04;
+//   else if (dateArray[1] === "May")
+//     month = 05;
+//   else if (dateArray[1] === "Jun")
+//     month = 06;
+//   else if (dateArray[1] === "Jul")
+//     month = 07;
+//   else if (dateArray[1] === "Aug")
+//     month = 08;
+//   else if (dateArray[1] === "Sep")
+//     month = 09;
+//   else if (dateArray[1] === "Oct")
+//     month = 10;
+//   else if (dateArray[1] === "Nov")
+//     month = 11;
+//   else if (dateArray[1] === "Dec")
+//     month = 12;
+//
+//   return month;
+// }
+//
+// function getCurrentYear() {
+//   var current = new Date();
+//   var dateArray = (current.toString()).split(' ');
+//   return parseInt(dateArray[3]);
+// }
+//
+// function geocodeAddress(geocoder, resultsMap) {
+//   var address = document.getElementById('location').value;
+//   geocoder.geocode({'address': address}, function(results, status) {
+//     if (status === google.maps.GeocoderStatus.OK) {
+//       resultsMap.setCenter(results[0].geometry.location);
+//       var marker = new google.maps.Marker({
+//         map: resultsMap,
+//         position: results[0].geometry.location
+//       });
+//     }
+//     else
+//       alert('Geocode was not successful for the following reason: ' + status);
+//   });
+// }
