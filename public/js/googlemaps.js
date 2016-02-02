@@ -9,13 +9,13 @@ function initMap() {
 
   //Mark starting position for reference
   var galvanize = new google.maps.Marker({
-    position: {lat: 39.754239, lng: -105.034896},
+    position: {lat: 39.757785, lng: -105.007142},
     map: map,
     icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
   });
 
   var home = new google.maps.Marker({
-    position: {lat: 39.757785, lng: -105.007142},
+    position: {lat: 39.754239, lng: -105.034896},
     map: map,
     icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
   });
